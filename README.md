@@ -169,6 +169,24 @@ The proxy binds `0.0.0.0` by default so containers and other machines can reach 
 
 `npm test` starts a local mock upstream. It checks bearer, header, and query auth injection, a bad key falling through to a good one, and the 503 response when all keys fail.
 
+## Updating
+
+Watch the repository on GitHub if you want to hear about changes. Click Watch, choose Custom, then pick Releases for new versions or Commits for every change. The feeds are at `https://github.com/Aliahasan399/fallback-key/releases.atom` and `https://github.com/Aliahasan399/fallback-key/commits/master.atom`.
+
+To update a local copy:
+
+```bash
+cd fallback-key
+git pull
+npm test
+```
+
+Stop and restart the proxy after pulling. A running process keeps using the old code until you restart it.
+
+Check the version you have with `node src/index.mjs --version`, or by calling `curl http://127.0.0.1:8787/__health`. Both report the installed version.
+
+If the package is published to npm later, `npm outdated -g opencode-key-failover` shows a newer version and `npm update -g opencode-key-failover` installs it.
+
 ## Contributing
 
 Fork the repo, make your change on a branch, and run `npm test` before opening a pull request. Keep real keys out of commits.
