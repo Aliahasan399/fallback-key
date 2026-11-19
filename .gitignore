@@ -1,0 +1,15 @@
+# Real credentials / local config — NEVER commit
+failover-proxy.json
+.env
+*.json.bak
+
+# Logs
+*.log
+failover-proxy-failures.log
+
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

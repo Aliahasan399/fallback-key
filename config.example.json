@@ -1,0 +1,61 @@
+{
+  "listen": "0.0.0.0:8787",
+  "notify": true,
+  "notifyMethod": "auto",
+  "webhook": "",
+  "quarantineMs": 60000,
+  "logFile": "failover-proxy.log",
+  "defaultRoute": "",
+
+  "routes": {
+    "hcnsec": {
+      "name": "HCNsec",
+      "upstream": "https://api.hcnsec.cn",
+      "pathPrefix": "",
+      "keys": ["sk-REPLACE_ME_1", "sk-REPLACE_ME_2"],
+      "auth": { "type": "bearer" },
+      "headers": {},
+      "retryOn": [401, 402, 403, 429, 500, 502, 503, 504]
+    },
+
+    "anthropic-style": {
+      "name": "Anthropic-style endpoint",
+      "upstream": "https://api.example.com",
+      "pathPrefix": "",
+      "keys": ["sk-ant-REPLACE_ME"],
+      "auth": { "type": "header", "name": "x-api-key", "prefix": "" },
+      "headers": { "anthropic-version": "2023-06-01" },
+      "retryOn": [401, 403, 429, 500, 502, 503, 504]
+    },
+
+    "gemini-style": {
+      "name": "Gemini-style endpoint",
+      "upstream": "https://generativelanguage.googleapis.com",
+      "pathPrefix": "v1beta",
+      "keys": ["AIza-REPLACE_ME"],
+      "auth": { "type": "query", "name": "key" },
+      "headers": {},
+      "retryOn": [401, 403, 429, 500, 502, 503, 504]
+    },
+
+    "azure-style": {
+      "name": "Azure OpenAI style",
+      "upstream": "https://my-resource.openai.azure.com",
+      "pathPrefix": "openai/deployments/my-deployment",
+      "keys": ["AZURE-REPLACE_ME"],
+      "auth": { "type": "header", "name": "api-key", "prefix": "" },
+      "headers": {},
+      "retryOn": [401, 403, 429, 500, 502, 503, 504]
+    },
+
+    "basic-style": {
+      "name": "HTTP Basic gateway",
+      "upstream": "https://gateway.example.com",
+      "pathPrefix": "",
+      "keys": ["password-REPLACE_ME"],
+      "auth": { "type": "basic", "user": "apiuser" },
+      "headers": {},
+      "retryOn": [401, 403, 429, 500, 502, 503, 504]
+    }
+  }
+}
